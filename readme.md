@@ -80,6 +80,15 @@ Para ejecutar el algoritmo personalizado de procesamiento de texto, conteo e his
 python wordcounter.py
 ```
 
+Descripcion de Complejidad:
+
+En cuanto a la complejidad, el script maneja dos aspectos principales: tiempo y espacio.
+
+Complejidad Temporal: Leer el archivo y hacer la limpieza inicial toma un tiempo proporcional al tamaño total del texto (lineal). Después, el script divide el contenido, cuenta las frecuencias y ordena los resultados; esta última parte requiere un pequeño esfuerzo extra, pero al tratarse de un conjunto reducido de palabras únicas, el rendimiento sigue siendo sumamente rápido.
+
+Complejidad Espacial: El consumo de memoria escala de forma lineal respecto al tamaño del archivo, ya que se carga completo en la RAM como un string, junto con las estructuras auxiliares (listas y diccionarios) necesarias para procesar el conteo.
+
+
 ---
 
 ## 📁 Estructura del proyecto
