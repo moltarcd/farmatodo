@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte de pruebas · Farmatodo QA · wordcounter.net · 20261015_140624</title>
+<style>
+  :root {
+    --c-blue:#0076CE; --c-pass:#28a745; --c-fail:#dc3545;
+    --c-err:#fd7e14; --c-skip:#6c757d; --c-bg:#f4f7f6; --c-line:#e3e6e8;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Roboto, Arial, sans-serif; margin:0; padding:24px;
+         background:var(--c-bg); color:#222; font-size:14px; }
+  .container { max-width:1100px; margin:auto; background:#fff; padding:28px 32px;
+                border-radius:10px; box-shadow:0 4px 18px rgba(0,0,0,.06); }
+  h1 { margin:0 0 6px; color:var(--c-blue); font-size:22px; }
+  h2 { color:#333; margin-top:32px; border-bottom:2px solid var(--c-line); padding-bottom:6px; }
+  .meta { color:#666; font-size:13px; margin-bottom:20px; }
+  .kpis { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin:20px 0 28px; }
+  .kpi { background:#f8f9fb; border-left:4px solid var(--c-blue); border-radius:6px;
+          padding:14px; text-align:center; }
+  .kpi.pass { border-left-color:var(--c-pass); }
+  .kpi.fail { border-left-color:var(--c-fail); }
+  .kpi.err  { border-left-color:var(--c-err); }
+  .kpi.skip { border-left-color:var(--c-skip); }
+  .kpi .v { font-size:22px; font-weight:700; }
+  .kpi .l { font-size:11px; color:#666; text-transform:uppercase; letter-spacing:.04em; }
+  table { width:100%; border-collapse:collapse; margin-top:8px; }
+  th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--c-line); vertical-align:top; }
+  th { background:var(--c-blue); color:#fff; font-weight:600; }
+  tr:hover td { background:#f6f8fa; }
+  .badge { display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px;
+            font-weight:700; color:#fff; letter-spacing:.03em; }
+  .badge-passed  { background:var(--c-pass); }
+  .badge-failed  { background:var(--c-fail); }
+  .badge-error   { background:var(--c-err); }
+  .err { color:var(--c-fail); font-family: ui-monospace, Consolas, monospace; font-size:12px; }
+  details { margin:14px 0; border:1px solid var(--c-line); border-radius:8px; background:#fff; }
+  details > summary { cursor:pointer; padding:12px 16px; font-weight:600; list-style:none;
+                       display:flex; align-items:center; gap:12px; }
+  details > summary::-webkit-details-marker { display:none; }
+  details[open] > summary { border-bottom:1px solid var(--c-line); background:#f8f9fb; }
+  .summary-name { flex:1; }
+  .summary-dur { color:#666; font-weight:400; font-size:12px; }
+  .block { padding:16px 20px; border-top:1px dashed var(--c-line); }
+  .block:first-of-type { border-top:none; }
+  .block h4 { margin:0 0 8px; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:#555; }
+  .kv { display:grid; grid-template-columns: 180px 1fr; gap:6px 16px; font-size:13px; }
+  .kv .k { color:#666; }
+  .kv .v { font-family: ui-monospace, Consolas, monospace; word-break:break-word; }
+  table.steps th, table.steps td { font-size:12.5px; }
+  .ok { color:var(--c-pass); font-weight:700; }
+  .ko { color:var(--c-fail); font-weight:700; }
+  pre { background:#0f172a; color:#e5e7eb; padding:12px 14px; border-radius:6px;
+         overflow:auto; font-size:12px; line-height:1.5; }
+  pre.console { background:#111827; max-height:240px; }
+  .shot { max-width:100%; border:1px solid var(--c-line); border-radius:6px; margin-top:8px; }
+  a { color:var(--c-blue); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .keyword-box { background: #fdfefe; border: 1px solid var(--c-line); padding: 10px; border-radius: 6px; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Reporte de pruebas · Farmatodo QA · wordcounter.net</h1>
+  <div class="meta">
+    Run ID <b>20261015_140624</b> ·
+    Inicio <b>2026-10-15 14:06:39</b> ·
+    Duración total <b>15s</b>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">6</div><div class="l">Total</div></div>
+    <div class="kpi pass"><div class="v">5</div><div class="l">Passed</div></div>
+    <div class="kpi fail"><div class="v">1</div><div class="l">Failed</div></div>
+    <div class="kpi err"><div class="v">0</div><div class="l">Error</div></div>
+    <div class="kpi skip"><div class="v">0</div><div class="l">Skipped</div></div>
+    <div class="kpi"><div class="v">83.3%</div><div class="l">Efectividad</div></div>
+  </div>
+
+  <h2>Índice de escenarios</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Escenario</th><th>Estado</th><th>Duración</th><th>Error</th></tr></thead>
+    <tbody>
+      
+            <tr>
+              <td><a href='#test-TC-001'>TC-001</a></td>
+              <td>Conteo estándar y Top Keyword Density</td>
+              <td><span class='badge badge-passed'>PASSED</span></td>
+              <td>3520 ms</td>
+              <td class='err'>-</td>
+            </tr>
+            
+            <tr>
+              <td><a href='#test-TC-002'>TC-002</a></td>
+              <td>Caja de texto vacía</td>
+              <td><span class='badge badge-passed'>PASSED</span></td>
+              <td>1464 ms</td>
+              <td class='err'>-</td>
+            </tr>
+            
+            <tr>
+              <td><a href='#test-TC-003'>TC-003</a></td>
+              <td>Espacios múltiples y saltos de línea</td>
+              <td><span class='badge badge-passed'>PASSED</span></td>
+              <td>2122 ms</td>
+              <td class='err'>-</td>
+            </tr>
+            
+            <tr>
+              <td><a href='#test-TC-004'>TC-004</a></td>
+              <td>Caracteres especiales</td>
+              <td><span class='badge badge-passed'>PASSED</span></td>
+              <td>2041 ms</td>
+              <td class='err'>-</td>
+            </tr>
+            
+            <tr>
+              <td><a href='#test-TC-005'>TC-005</a></td>
+              <td>Keysensitive a mayúsculas/minúsculas</td>
+              <td><span class='badge badge-passed'>PASSED</span></td>
+              <td>1978 ms</td>
+              <td class='err'>-</td>
+            </tr>
+            
+            <tr>
+              <td><a href='#test-TC-006'>TC-006</a></td>
+              <td>Escenario de fallo controlado</td>
+              <td><span class='badge badge-failed'>FAILED</span></td>
+              <td>2091 ms</td>
+              <td class='err'>[FAIL] Caso de error intencional: esperado 999 palabras, pero se obtuvo 3.</td>
+            </tr>
+            
+    </tbody>
+  </table>
+
+  <h2>Detalle por escenario</h2>
+  
+            <details id="test-TC-001">
+              <summary>
+                <span class="badge badge-passed">PASSED</span>
+                <span class="summary-name">TC-001 · Conteo estándar y Top Keyword Density</span>
+                <span class="summary-dur">3520 ms</span>
+              </summary>
+              
+              <div class="block">
+                <h4>Contexto</h4>
+                <div class="kv">
+                  <div class="k">ID</div><div class="v">TC-001</div>
+                  <div class="k">Inicio</div><div class="v">2026-10-15T17:06:24.689330</div>
+                  <div class="k">Fin</div><div class="v">2026-10-15T17:06:28.209692</div>
+                  <div class="k">Duración</div><div class="v">3520 ms</div>
+                  <div class="k">URL final</div><div class="v">https://wordcounter.net/site/get-revisions (HTTP 200)</div>
+                </div>
+              </div>
+              
+              <div class="block">
+                <h4>Entrada enviada</h4>
+                <div class="kv">
+                  <div class="k">Preview</div><div class="v">farma farmatodo farma todo todo farma</div>
+                  <div class="k">Longitud</div><div class="v">37</div>
+                  <div class="k">SHA256</div><div class="v">ab995b056a34</div>
+                </div>
+              </div>
+              
+              
+            <div class="block">
+              <h4>Evidencia de pasos</h4>
+              <table class="steps">
+                <thead><tr><th>Comprobación</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+                <tbody><tr><td>Conteo de palabras</td><td class='v'>6</td><td class='v'>6</td><td><span class='ok'>OK</span></td></tr><tr><td>Conteo de caracteres</td><td class='v'>37</td><td class='v'>37</td><td><span class='ok'>OK</span></td></tr></tbody>
+              </table>
+            </div>
+              
+            <div class="block">
+              <h4>Densidad de Palabras Clave (Top 3 Keyword Density)</h4>
+              <div class="kv">
+                <div class="k">Esperado (Top 3)</div>
+                <div class="v keyword-box">• <b>farma</b>: 3 reps<br>• <b>todo</b>: 2 reps<br>• <b>farmatodo</b>: 1 reps</div>
+                <div class="k">Obtenido (Top 3 UI)</div>
+                <div class="v keyword-box">• <b>3 (50%)</b>: 0 reps<br>• <b>2 (33%)</b>: 0 reps<br>• <b>1 (17%)</b>: 0 reps</div>
+              </div>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Captura de pantalla (Evidencia Visual)</h4>
+              <a href="artifacts_20261015_140624/TC-001_conteo_estándar_y_top_keyword_density.png" target="_blank">
+                <img class="shot" src="artifacts_20261015_140624/TC-001_conteo_estándar_y_top_keyword_density.png" alt="screenshot">
+              </a>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Trazas Playwright</h4>
+              <div class="kv">
+                <div class="k">Archivo ZIP</div>
+                <div class="v"><a href="artifacts_20261015_140624/TC-001_trace.zip" download>Descargar Trace (.zip)</a> (Ejecutar: <code>playwright show-trace artifacts_20261015_140624/TC-001_trace.zip</code>)</div>
+              </div>
+            </div>
+            </details>
+            
+            <details id="test-TC-002">
+              <summary>
+                <span class="badge badge-passed">PASSED</span>
+                <span class="summary-name">TC-002 · Caja de texto vacía</span>
+                <span class="summary-dur">1464 ms</span>
+              </summary>
+              
+              <div class="block">
+                <h4>Contexto</h4>
+                <div class="kv">
+                  <div class="k">ID</div><div class="v">TC-002</div>
+                  <div class="k">Inicio</div><div class="v">2026-10-15T17:06:28.554791</div>
+                  <div class="k">Fin</div><div class="v">2026-10-15T17:06:30.019209</div>
+                  <div class="k">Duración</div><div class="v">1464 ms</div>
+                  <div class="k">URL final</div><div class="v">https://wordcounter.net/site/get-revisions (HTTP 200)</div>
+                </div>
+              </div>
+              
+              <div class="block">
+                <h4>Entrada enviada</h4>
+                <div class="kv">
+                  <div class="k">Preview</div><div class="v">-</div>
+                  <div class="k">Longitud</div><div class="v">0</div>
+                  <div class="k">SHA256</div><div class="v">e3b0c44298fc</div>
+                </div>
+              </div>
+              
+              
+            <div class="block">
+              <h4>Evidencia de pasos</h4>
+              <table class="steps">
+                <thead><tr><th>Comprobación</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+                <tbody><tr><td>Conteo con caja vacía</td><td class='v'>0</td><td class='v'>0</td><td><span class='ok'>OK</span></td></tr></tbody>
+              </table>
+            </div>
+              
+            <div class="block">
+              <h4>Densidad de Palabras Clave (Top 3 Keyword Density)</h4>
+              <div class="kv">
+                <div class="k">Esperado (Top 3)</div>
+                <div class="v keyword-box">Sin datos de palabras clave</div>
+                <div class="k">Obtenido (Top 3 UI)</div>
+                <div class="v keyword-box">Sin datos de palabras clave</div>
+              </div>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Captura de pantalla (Evidencia Visual)</h4>
+              <a href="artifacts_20261015_140624/TC-002_caja_de_texto_vacía.png" target="_blank">
+                <img class="shot" src="artifacts_20261015_140624/TC-002_caja_de_texto_vacía.png" alt="screenshot">
+              </a>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Trazas Playwright</h4>
+              <div class="kv">
+                <div class="k">Archivo ZIP</div>
+                <div class="v"><a href="artifacts_20261015_140624/TC-002_trace.zip" download>Descargar Trace (.zip)</a> (Ejecutar: <code>playwright show-trace artifacts_20261015_140624/TC-002_trace.zip</code>)</div>
+              </div>
+            </div>
+            </details>
+            
+            <details id="test-TC-003">
+              <summary>
+                <span class="badge badge-passed">PASSED</span>
+                <span class="summary-name">TC-003 · Espacios múltiples y saltos de línea</span>
+                <span class="summary-dur">2122 ms</span>
+              </summary>
+              
+              <div class="block">
+                <h4>Contexto</h4>
+                <div class="kv">
+                  <div class="k">ID</div><div class="v">TC-003</div>
+                  <div class="k">Inicio</div><div class="v">2026-10-15T17:06:30.392876</div>
+                  <div class="k">Fin</div><div class="v">2026-10-15T17:06:32.515259</div>
+                  <div class="k">Duración</div><div class="v">2122 ms</div>
+                  <div class="k">URL final</div><div class="v">https://wordcounter.net/site/show-activities (HTTP 200)</div>
+                </div>
+              </div>
+              
+              <div class="block">
+                <h4>Entrada enviada</h4>
+                <div class="kv">
+                  <div class="k">Preview</div><div class="v">   farmatodo    
+
+   calidad 		 software   </div>
+                  <div class="k">Longitud</div><div class="v">43</div>
+                  <div class="k">SHA256</div><div class="v">a20afd6d8879</div>
+                </div>
+              </div>
+              
+              
+            <div class="block">
+              <h4>Evidencia de pasos</h4>
+              <table class="steps">
+                <thead><tr><th>Comprobación</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+                <tbody><tr><td>Palabras con espacios múltiples</td><td class='v'>3</td><td class='v'>3</td><td><span class='ok'>OK</span></td></tr></tbody>
+              </table>
+            </div>
+              
+            <div class="block">
+              <h4>Densidad de Palabras Clave (Top 3 Keyword Density)</h4>
+              <div class="kv">
+                <div class="k">Esperado (Top 3)</div>
+                <div class="v keyword-box">• <b>farmatodo</b>: 1 reps<br>• <b>calidad</b>: 1 reps<br>• <b>software</b>: 1 reps</div>
+                <div class="k">Obtenido (Top 3 UI)</div>
+                <div class="v keyword-box">• <b>1 (33%)</b>: 0 reps<br>• <b>1 (33%)</b>: 0 reps<br>• <b>1 (33%)</b>: 0 reps</div>
+              </div>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Captura de pantalla (Evidencia Visual)</h4>
+              <a href="artifacts_20261015_140624/TC-003_espacios_múltiples_y_saltos_de_línea.png" target="_blank">
+                <img class="shot" src="artifacts_20261015_140624/TC-003_espacios_múltiples_y_saltos_de_línea.png" alt="screenshot">
+              </a>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Trazas Playwright</h4>
+              <div class="kv">
+                <div class="k">Archivo ZIP</div>
+                <div class="v"><a href="artifacts_20261015_140624/TC-003_trace.zip" download>Descargar Trace (.zip)</a> (Ejecutar: <code>playwright show-trace artifacts_20261015_140624/TC-003_trace.zip</code>)</div>
+              </div>
+            </div>
+            </details>
+            
+            <details id="test-TC-004">
+              <summary>
+                <span class="badge badge-passed">PASSED</span>
+                <span class="summary-name">TC-004 · Caracteres especiales</span>
+                <span class="summary-dur">2041 ms</span>
+              </summary>
+              
+              <div class="block">
+                <h4>Contexto</h4>
+                <div class="kv">
+                  <div class="k">ID</div><div class="v">TC-004</div>
+                  <div class="k">Inicio</div><div class="v">2026-10-15T17:06:32.866373</div>
+                  <div class="k">Fin</div><div class="v">2026-10-15T17:06:34.908256</div>
+                  <div class="k">Duración</div><div class="v">2041 ms</div>
+                  <div class="k">URL final</div><div class="v">https://wordcounter.net/site/show-activities (HTTP 200)</div>
+                </div>
+              </div>
+              
+              <div class="block">
+                <h4>Entrada enviada</h4>
+                <div class="kv">
+                  <div class="k">Preview</div><div class="v">!!! @@@ ### $$$ %%% ^^^ ***</div>
+                  <div class="k">Longitud</div><div class="v">27</div>
+                  <div class="k">SHA256</div><div class="v">af60471b4257</div>
+                </div>
+              </div>
+              
+              
+            <div class="block">
+              <h4>Evidencia de pasos</h4>
+              <table class="steps">
+                <thead><tr><th>Comprobación</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+                <tbody><tr><td>Palabras en solo símbolos</td><td class='v'>0</td><td class='v'>0</td><td><span class='ok'>OK</span></td></tr></tbody>
+              </table>
+            </div>
+              
+            <div class="block">
+              <h4>Densidad de Palabras Clave (Top 3 Keyword Density)</h4>
+              <div class="kv">
+                <div class="k">Esperado (Top 3)</div>
+                <div class="v keyword-box">Sin datos de palabras clave</div>
+                <div class="k">Obtenido (Top 3 UI)</div>
+                <div class="v keyword-box">Sin datos de palabras clave</div>
+              </div>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Captura de pantalla (Evidencia Visual)</h4>
+              <a href="artifacts_20261015_140624/TC-004_caracteres_especiales.png" target="_blank">
+                <img class="shot" src="artifacts_20261015_140624/TC-004_caracteres_especiales.png" alt="screenshot">
+              </a>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Trazas Playwright</h4>
+              <div class="kv">
+                <div class="k">Archivo ZIP</div>
+                <div class="v"><a href="artifacts_20261015_140624/TC-004_trace.zip" download>Descargar Trace (.zip)</a> (Ejecutar: <code>playwright show-trace artifacts_20261015_140624/TC-004_trace.zip</code>)</div>
+              </div>
+            </div>
+            </details>
+            
+            <details id="test-TC-005">
+              <summary>
+                <span class="badge badge-passed">PASSED</span>
+                <span class="summary-name">TC-005 · Keysensitive a mayúsculas/minúsculas</span>
+                <span class="summary-dur">1978 ms</span>
+              </summary>
+              
+              <div class="block">
+                <h4>Contexto</h4>
+                <div class="kv">
+                  <div class="k">ID</div><div class="v">TC-005</div>
+                  <div class="k">Inicio</div><div class="v">2026-10-15T17:06:35.211933</div>
+                  <div class="k">Fin</div><div class="v">2026-10-15T17:06:37.190295</div>
+                  <div class="k">Duración</div><div class="v">1978 ms</div>
+                  <div class="k">URL final</div><div class="v">https://wordcounter.net/site/get-revisions (HTTP 200)</div>
+                </div>
+              </div>
+              
+              <div class="block">
+                <h4>Entrada enviada</h4>
+                <div class="kv">
+                  <div class="k">Preview</div><div class="v">Farmatodo FARMATODO farmatodo Farmatodo</div>
+                  <div class="k">Longitud</div><div class="v">39</div>
+                  <div class="k">SHA256</div><div class="v">0349f0df8b05</div>
+                </div>
+              </div>
+              
+              
+            <div class="block">
+              <h4>Evidencia de pasos</h4>
+              <table class="steps">
+                <thead><tr><th>Comprobación</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+                <tbody><tr><td>Conteo variantes capitalización</td><td class='v'>4</td><td class='v'>4</td><td><span class='ok'>OK</span></td></tr></tbody>
+              </table>
+            </div>
+              
+            <div class="block">
+              <h4>Densidad de Palabras Clave (Top 3 Keyword Density)</h4>
+              <div class="kv">
+                <div class="k">Esperado (Top 3)</div>
+                <div class="v keyword-box">• <b>farmatodo</b>: 4 reps</div>
+                <div class="k">Obtenido (Top 3 UI)</div>
+                <div class="v keyword-box">• <b>4 (100%)</b>: 0 reps</div>
+              </div>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Captura de pantalla (Evidencia Visual)</h4>
+              <a href="artifacts_20261015_140624/TC-005_keysensitive_a_mayúsculasminúsculas.png" target="_blank">
+                <img class="shot" src="artifacts_20261015_140624/TC-005_keysensitive_a_mayúsculasminúsculas.png" alt="screenshot">
+              </a>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Trazas Playwright</h4>
+              <div class="kv">
+                <div class="k">Archivo ZIP</div>
+                <div class="v"><a href="artifacts_20261015_140624/TC-005_trace.zip" download>Descargar Trace (.zip)</a> (Ejecutar: <code>playwright show-trace artifacts_20261015_140624/TC-005_trace.zip</code>)</div>
+              </div>
+            </div>
+            </details>
+            
+            <details id="test-TC-006">
+              <summary>
+                <span class="badge badge-failed">FAILED</span>
+                <span class="summary-name">TC-006 · Escenario de fallo controlado</span>
+                <span class="summary-dur">2091 ms</span>
+              </summary>
+              
+              <div class="block">
+                <h4>Contexto</h4>
+                <div class="kv">
+                  <div class="k">ID</div><div class="v">TC-006</div>
+                  <div class="k">Inicio</div><div class="v">2026-10-15T17:06:37.488220</div>
+                  <div class="k">Fin</div><div class="v">2026-10-15T17:06:39.579798</div>
+                  <div class="k">Duración</div><div class="v">2091 ms</div>
+                  <div class="k">URL final</div><div class="v">https://wordcounter.net/site/get-revisions (HTTP 200)</div>
+                </div>
+              </div>
+              
+              <div class="block">
+                <h4>Entrada enviada</h4>
+                <div class="kv">
+                  <div class="k">Preview</div><div class="v">farmatodo automatizacion qa</div>
+                  <div class="k">Longitud</div><div class="v">27</div>
+                  <div class="k">SHA256</div><div class="v">aa12156c7b2f</div>
+                </div>
+              </div>
+              
+              
+            <div class="block">
+              <h4>Evidencia de pasos</h4>
+              <table class="steps">
+                <thead><tr><th>Comprobación</th><th>Esperado</th><th>Obtenido</th><th></th></tr></thead>
+                <tbody><tr><td>Validación con fallo forzado de demostración</td><td class='v'>999</td><td class='v'>3</td><td><span class='ko'>KO</span></td></tr></tbody>
+              </table>
+            </div>
+              
+            <div class="block">
+              <h4>Densidad de Palabras Clave (Top 3 Keyword Density)</h4>
+              <div class="kv">
+                <div class="k">Esperado (Top 3)</div>
+                <div class="v keyword-box">Sin datos de palabras clave</div>
+                <div class="k">Obtenido (Top 3 UI)</div>
+                <div class="v keyword-box">• <b>1 (33%)</b>: 0 reps<br>• <b>1 (33%)</b>: 0 reps<br>• <b>1 (33%)</b>: 0 reps</div>
+              </div>
+            </div>
+              
+            <div class="block">
+              <h4>Error</h4>
+              <pre>[FAIL] Caso de error intencional: esperado 999 palabras, pero se obtuvo 3.</pre>
+              <h4>Stacktrace</h4><pre>Traceback (most recent call last):
+  File "C:\proyectos\farmatodo\report_generator.py", line 48, in run_suite
+    test_func(page, input_text, expected_data, steps_evidence, actual_data)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\proyectos\farmatodo\test_scenarios.py", line 168, in tc_06_intentional_failure
+    assert actual_data["words"] == expected_data["words"], f"[FAIL] Caso de error intencional: esperado {expected_data['words']} palabras, pero se obtuvo {actual_data['words']}."
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [FAIL] Caso de error intencional: esperado 999 palabras, pero se obtuvo 3.
+</pre>
+            </div>
+              
+            <div class="block">
+              <h4>Captura de pantalla (Evidencia Visual)</h4>
+              <a href="artifacts_20261015_140624/TC-006_escenario_de_fallo_controlado.png" target="_blank">
+                <img class="shot" src="artifacts_20261015_140624/TC-006_escenario_de_fallo_controlado.png" alt="screenshot">
+              </a>
+            </div>
+              
+              
+            <div class="block">
+              <h4>Trazas Playwright</h4>
+              <div class="kv">
+                <div class="k">Archivo ZIP</div>
+                <div class="v"><a href="artifacts_20261015_140624/TC-006_trace.zip" download>Descargar Trace (.zip)</a> (Ejecutar: <code>playwright show-trace artifacts_20261015_140624/TC-006_trace.zip</code>)</div>
+              </div>
+            </div>
+            </details>
+            
+</div>
+</body>
+</html>
