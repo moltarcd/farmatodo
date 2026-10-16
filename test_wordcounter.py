@@ -83,7 +83,7 @@ if __name__ == "__main__":
             tc_06_intentional_failure,
             "farmatodo automatizacion qa",
             {
-                "words": 999,  # Forzamos fallo para verificar reporte de errores y screenshot
+                "words": 999,  
                 "characters": 27,
                 "keywords": []
             }

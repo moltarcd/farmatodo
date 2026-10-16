@@ -4,7 +4,6 @@ def extract_keyword_density(page):
     keywords = []
     try:
         page.wait_for_selector("#kwd-accordion-data, .card-body", timeout=3000)
-        # Seleccionamos las filas o elementos del panel de densidad
         items = page.locator("#kwd-accordion-data .row, #kwd-accordion-data .list-group-item, div[id*='kwd'] .d-flex").all()
         
         for item in items[:3]:
